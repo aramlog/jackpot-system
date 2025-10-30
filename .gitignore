@@ -1,0 +1,59 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Java / JVM
+hs_err_pid*
+replay_pid*
+
+# Maven
+/target/
+**/target/
+!**/src/**/target/
+.mvn/timing.properties
+# Uncomment if you generate release backups
+# pom.xml.versionsBackup
+
+# Gradle (in case)
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# Local env/config
+*.env
+*.env.*
+.envrc
+
+# Coverage / reports
+coverage/
+*.exec
+jacoco.exec
+site/
+
+# H2 / DB files (if switched to file mode)
+*.mv.db
+*.h2.db
+
+# Temporary files
+*.swp
+*.swo
+~$*
