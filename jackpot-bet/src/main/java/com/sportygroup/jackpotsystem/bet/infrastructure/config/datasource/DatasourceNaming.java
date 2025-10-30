@@ -6,4 +6,5 @@ public interface DatasourceNaming {
     String BET_ENTITY_MANAGER_FACTORY = "betEntityManagerFactory";
     String BET_TRANSACTION_MANAGER = "betTransactionManager";
     String BET_BASE_PACKAGE = "com.sportygroup.jackpotsystem.bet.infrastructure";
+    String BET_LIQUIBASE = "betLiquibase";
 }

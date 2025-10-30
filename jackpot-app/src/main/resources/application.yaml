@@ -17,13 +17,22 @@ jackpot:
       driver-class-name: org.h2.Driver
       username: sa
       password: ""
+      liquibase:
+        change-log: classpath:db/changelog/bet/changelog-master.xml
+        should-run: false
     contribution:
       url: jdbc:h2:mem:jackpot-contribution;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
       driver-class-name: org.h2.Driver
       username: sa
       password: ""
+      liquibase:
+        change-log: classpath:db/changelog/contribution/changelog-master.xml
+        should-run: false
     reward:
       url: jdbc:h2:mem:jackpot-reward;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
       driver-class-name: org.h2.Driver
       username: sa
       password: ""
+      liquibase:
+        change-log: classpath:db/changelog/reward/changelog-master.xml
+        should-run: false

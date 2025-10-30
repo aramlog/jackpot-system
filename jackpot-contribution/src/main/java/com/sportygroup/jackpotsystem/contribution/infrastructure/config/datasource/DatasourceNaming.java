@@ -6,4 +6,5 @@ public interface DatasourceNaming {
     String CONTRIBUTION_ENTITY_MANAGER_FACTORY = "contributionEntityManagerFactory";
     String CONTRIBUTION_TRANSACTION_MANAGER = "contributionTransactionManager";
     String CONTRIBUTION_BASE_PACKAGE = "com.sportygroup.jackpotsystem.contribution.infrastructure";
+    String CONTRIBUTION_LIQUIBASE = "contributionLiquibase";
 }

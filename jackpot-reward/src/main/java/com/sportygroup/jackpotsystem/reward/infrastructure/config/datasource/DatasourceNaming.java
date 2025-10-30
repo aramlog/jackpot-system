@@ -6,4 +6,5 @@ public interface DatasourceNaming {
     String REWARD_ENTITY_MANAGER_FACTORY = "rewardEntityManagerFactory";
     String REWARD_TRANSACTION_MANAGER = "rewardTransactionManager";
     String REWARD_BASE_PACKAGE = "com.sportygroup.jackpotsystem.reward.infrastructure";
+    String REWARD_LIQUIBASE = "rewardLiquibase";
 }
