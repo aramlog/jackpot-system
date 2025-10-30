@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <changeSet id="1.0_initial_tables" author="Aram Kirakosyan">
+        <createTable tableName="jackpot_contribution">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="bet_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jackpot_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stake_amount" type="DECIMAL(19,2)"/>
+            <column name="contribution_amount" type="DECIMAL(19,2)"/>
+            <column name="current_jackpot_amount" type="DECIMAL(19,2)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
+        </createTable>
+
+        <createIndex tableName="jackpot_contribution" indexName="idx_contrib_jackpot">
+            <column name="jackpot_id"/>
+        </createIndex>
+
+        <createIndex tableName="jackpot_contribution" indexName="idx_contrib_bet">
+            <column name="bet_id"/>
+        </createIndex>
+
+        <createIndex tableName="jackpot_contribution" indexName="idx_contrib_user">
+            <column name="user_id"/>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>
+
+
