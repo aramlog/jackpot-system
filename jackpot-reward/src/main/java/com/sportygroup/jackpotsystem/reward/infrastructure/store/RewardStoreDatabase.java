@@ -7,6 +7,7 @@ import com.sportygroup.jackpotsystem.reward.infrastructure.TransactionalRewardRe
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.mapper.RewardStoreMapper;
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.repository.RewardRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
-@AllArgsConstructor
-@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class RewardStoreDatabase implements RewardStore {
 
     private final RewardRepository repository;

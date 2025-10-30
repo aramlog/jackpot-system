@@ -2,11 +2,13 @@ package com.sportygroup.jackpotsystem.contribution.infrastructure.store.reposito
 
 import com.sportygroup.jackpotsystem.contribution.infrastructure.store.entity.ContributionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public interface ContributionRepository extends JpaRepository<ContributionEntity, UUID> {
     List<ContributionEntity> findByJackpotId(UUID jackpotId);
 

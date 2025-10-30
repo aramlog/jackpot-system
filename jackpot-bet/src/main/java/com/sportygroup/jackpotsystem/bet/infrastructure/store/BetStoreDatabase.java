@@ -4,16 +4,14 @@ import com.sportygroup.jackpotsystem.bet.domain.Bet;
 import com.sportygroup.jackpotsystem.bet.domain.BetStore;
 import com.sportygroup.jackpotsystem.bet.infrastructure.store.mapper.BetStoreMapper;
 import com.sportygroup.jackpotsystem.bet.infrastructure.store.repository.BetRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BetStoreDatabase implements BetStore {
 
     private final BetRepository repository;

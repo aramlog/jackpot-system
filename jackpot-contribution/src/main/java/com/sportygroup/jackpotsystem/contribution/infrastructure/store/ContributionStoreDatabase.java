@@ -6,18 +6,14 @@ import com.sportygroup.jackpotsystem.contribution.infrastructure.TransactionalCo
 import com.sportygroup.jackpotsystem.contribution.infrastructure.TransactionalContributionReadOnly;
 import com.sportygroup.jackpotsystem.contribution.infrastructure.store.mapper.ContributionStoreMapper;
 import com.sportygroup.jackpotsystem.contribution.infrastructure.store.repository.ContributionRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component
-@AllArgsConstructor
-@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ContributionStoreDatabase implements ContributionStore {
 
     private final ContributionRepository repository;
