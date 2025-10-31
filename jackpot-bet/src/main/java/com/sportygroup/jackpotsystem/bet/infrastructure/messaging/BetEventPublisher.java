@@ -1,7 +1,7 @@
 package com.sportygroup.jackpotsystem.bet.infrastructure.messaging;
 
 import com.sportygroup.jackpotsystem.bet.domain.Bet;
-import com.sportygroup.jackpotsystem.bet.domain.BetEvent;
+import com.sportygroup.jackpotsystem.core.infrastructure.messaging.BetEvent;
 import com.sportygroup.jackpotsystem.core.infrastructure.messaging.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

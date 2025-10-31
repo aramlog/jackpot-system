@@ -6,10 +6,7 @@ import com.sportygroup.jackpotsystem.reward.infrastructure.TransactionalReward;
 import com.sportygroup.jackpotsystem.reward.infrastructure.TransactionalRewardReadOnly;
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.mapper.RewardStoreMapper;
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.repository.RewardRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
