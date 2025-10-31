@@ -4,7 +4,6 @@ import com.sportygroup.jackpotsystem.core.infrastructure.messaging.BetEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 @Slf4j
@@ -12,19 +11,23 @@ import java.time.Instant;
 public class ProcessBetEventCommand {
 
     private final ContributionStore contributionStore;
+    private final ContributionStrategy contributionStrategy;
 
     public void execute(Input input) {
         final var betEvent = input.betEvent();
         log.info("Processing bet event for betId: {}, jackpotId: {}", betEvent.betId(), betEvent.jackpotId());
 
-        final var contributionPercentage = new BigDecimal("0.05");
-        final var contributionAmount = betEvent.betAmount().multiply(contributionPercentage);
-
         // Calculate current jackpot amount from existing contributions
         final var existingContributions = contributionStore.findByJackpotId(betEvent.jackpotId());
         final var currentJackpotAmount = existingContributions.stream()
                 .map(JackpotContribution::contributionAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
+
+        // Use strategy to calculate contribution amount
+        final var contributionAmount = contributionStrategy.calculateContribution(
+                betEvent.betAmount(),
+                currentJackpotAmount
+        );
 
         final var contribution = new JackpotContribution(
                 null,
