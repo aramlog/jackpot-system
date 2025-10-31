@@ -36,3 +36,11 @@ jackpot:
       liquibase:
         change-log: classpath:db/changelog/reward/changelog-master.xml
         should-run: true
+
+springdoc:
+  swagger-ui:
+    path: /api-docs
+    enabled: true
+  api-docs:
+    path: /api/v3/api-docs
+    enabled: true
