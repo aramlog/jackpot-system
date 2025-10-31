@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: jackpot-system
+  kafka:
+    bootstrap-servers: localhost:9092
   jpa:
     show-sql: false
     hibernate:
@@ -11,6 +13,9 @@ spring:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
 
 jackpot:
+  kafka:
+    topics:
+      bet: jackpot-bets
   datasource:
     bet:
       jdbcUrl: jdbc:h2:mem:jackpot-bet;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
