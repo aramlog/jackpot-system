@@ -15,7 +15,7 @@ import java.util.UUID;
 public class BetEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "bet_id", nullable = false)
     private UUID betId;
 

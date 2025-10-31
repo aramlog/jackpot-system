@@ -1,41 +1,101 @@
 server:
   port: 8080
+  address: 0.0.0.0
+
 spring:
-  application:
-    name: jackpot-system
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 5MB
+  datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5432/jackpot
+    username: postgres
+    password:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      idle-timeout: 300000
+      max-lifetime: 600000
+      keepalive-time: 300000
+      validation-timeout: 3000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
   jpa:
-    show-sql: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
     properties:
-      hibernate.dialect: org.hibernate.dialect.H2Dialect
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    enabled: true
 
 jackpot:
   datasource:
     bet:
-      jdbcUrl: jdbc:h2:mem:jackpot-bet;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
-      driver-class-name: org.h2.Driver
-      username: sa
-      password: ""
+      jdbcUrl: ${spring.datasource.jdbcUrl}?currentSchema=jackpot_bet
+      username: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      driver-class-name: ${spring.datasource.driver-class-name}
+      maximum-pool-size: ${spring.datasource.hikari.maximum-pool-size}
+      minimum-idle: ${spring.datasource.hikari.minimum-idle}
+      idle-timeout: ${spring.datasource.hikari.idle-timeout}
+      max-lifetime: ${spring.datasource.hikari.max-lifetime}
+      validation-timeout: ${spring.datasource.hikari.validation-timeout}
+      connection-timeout: ${spring.datasource.hikari.connection-timeout}
+      connection-test-query: ${spring.datasource.hikari.connection-test-query}
+      default_schema: jackpot_bet
       liquibase:
+        shouldRun: ${spring.liquibase.enabled}
+        defaultSchema: jackpot_bet
         change-log: classpath:db/changelog/bet/changelog-master.xml
-        should-run: true
+        databaseChangeLogTable: z_changelog
+        databaseChangeLogLockTable: z_changelog_lock
     contribution:
-      jdbcUrl: jdbc:h2:mem:jackpot-contribution;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
-      driver-class-name: org.h2.Driver
-      username: sa
-      password: ""
+      jdbcUrl: ${spring.datasource.jdbcUrl}?currentSchema=jackpot_contribution
+      username: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      driver-class-name: ${spring.datasource.driver-class-name}
+      maximum-pool-size: ${spring.datasource.hikari.maximum-pool-size}
+      minimum-idle: ${spring.datasource.hikari.minimum-idle}
+      idle-timeout: ${spring.datasource.hikari.idle-timeout}
+      max-lifetime: ${spring.datasource.hikari.max-lifetime}
+      validation-timeout: ${spring.datasource.hikari.validation-timeout}
+      connection-timeout: ${spring.datasource.hikari.connection-timeout}
+      connection-test-query: ${spring.datasource.hikari.connection-test-query}
+      default_schema: jackpot_contribution
       liquibase:
+        shouldRun: ${spring.liquibase.enabled}
+        defaultSchema: jackpot_contribution
         change-log: classpath:db/changelog/contribution/changelog-master.xml
-        should-run: true
+        databaseChangeLogTable: z_changelog
+        databaseChangeLogLockTable: z_changelog_lock
     reward:
-      jdbcUrl: jdbc:h2:mem:jackpot-reward;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
-      driver-class-name: org.h2.Driver
-      username: sa
-      password: ""
+      jdbcUrl: ${spring.datasource.jdbcUrl}?currentSchema=jackpot_reward
+      username: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      driver-class-name: ${spring.datasource.driver-class-name}
+      maximum-pool-size: ${spring.datasource.hikari.maximum-pool-size}
+      minimum-idle: ${spring.datasource.hikari.minimum-idle}
+      idle-timeout: ${spring.datasource.hikari.idle-timeout}
+      max-lifetime: ${spring.datasource.hikari.max-lifetime}
+      validation-timeout: ${spring.datasource.hikari.validation-timeout}
+      connection-timeout: ${spring.datasource.hikari.connection-timeout}
+      connection-test-query: ${spring.datasource.hikari.connection-test-query}
+      default_schema: jackpot_reward
       liquibase:
+        shouldRun: ${spring.liquibase.enabled}
+        defaultSchema: jackpot_reward
         change-log: classpath:db/changelog/reward/changelog-master.xml
-        should-run: true
+        databaseChangeLogTable: z_changelog
+        databaseChangeLogLockTable: z_changelog_lock
+
+logging:
+  level:
+    liquibase: ERROR
 
 springdoc:
   swagger-ui:
@@ -44,3 +104,4 @@ springdoc:
   api-docs:
     path: /api/v3/api-docs
     enabled: true
+

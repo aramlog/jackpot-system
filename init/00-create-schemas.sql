@@ -1,0 +1,3 @@
+CREATE SCHEMA IF NOT EXISTS jackpot_bet;
+CREATE SCHEMA IF NOT EXISTS jackpot_contribution;
+CREATE SCHEMA IF NOT EXISTS jackpot_reward;

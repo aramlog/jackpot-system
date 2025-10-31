@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: jackpot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    command: >
+      postgres
+      -c tcp_keepalives_idle=60
+      -c tcp_keepalives_interval=30
+      -c tcp_keepalives_count=5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jackpot-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_JDBCURL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      JAVA_OPTS: "-Xms512m -Xmx1g"
+
+volumes:
+  pg_data:
+
