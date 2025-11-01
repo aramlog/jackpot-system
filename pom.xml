@@ -25,6 +25,7 @@
     <properties>
         <java.version>21</java.version>
         <spring-boot.version>3.5.7</spring-boot.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
         <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
 
         <jackpot-core.version>1.0.0-SNAPSHOT</jackpot-core.version>
@@ -98,6 +99,13 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc-openapi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!-- Mapstruct dependencies-->

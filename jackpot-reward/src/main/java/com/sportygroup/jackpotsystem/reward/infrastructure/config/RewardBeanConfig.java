@@ -1,6 +1,9 @@
 package com.sportygroup.jackpotsystem.reward.infrastructure.config;
 
+import com.sportygroup.jackpotsystem.core.domain.store.ContributionStore;
+import com.sportygroup.jackpotsystem.reward.domain.EvaluateRewardCommand;
 import com.sportygroup.jackpotsystem.reward.domain.RewardStore;
+import com.sportygroup.jackpotsystem.reward.domain.strategy.RewardStrategy;
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.RewardStoreDatabase;
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.mapper.RewardStoreMapper;
 import com.sportygroup.jackpotsystem.reward.infrastructure.store.repository.RewardRepository;
@@ -14,6 +17,13 @@ public class RewardBeanConfig {
     RewardStore rewardStore(RewardRepository rewardRepository,
                             RewardStoreMapper rewardStoreMapper) {
         return new RewardStoreDatabase(rewardRepository, rewardStoreMapper);
+    }
+
+    @Bean
+    EvaluateRewardCommand evaluateRewardCommand(ContributionStore contributionStore,
+                                                 RewardStore rewardStore,
+                                                 RewardStrategy rewardStrategy) {
+        return new EvaluateRewardCommand(contributionStore, rewardStore, rewardStrategy);
     }
 }
 

@@ -3,10 +3,6 @@ server:
   address: 0.0.0.0
 
 spring:
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 5MB
   datasource:
     jdbcUrl: jdbc:postgresql://localhost:5432/jackpot
     username: postgres
@@ -37,6 +33,7 @@ spring:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
 
 jackpot:
+  contributionApiBaseUrl: http://localhost:8080
   kafka:
     topics:
       bet: jackpot-bets
@@ -48,6 +45,14 @@ jackpot:
       initialPercentage: 0.05  # 5%
       minPercentage: 0.02      # 2%
       threshold: 10000         # When jackpot reaches this, use minPercentage
+  reward:
+    type: FIXED  # FIXED or VARIABLE
+    fixed:
+      winChance: 0.001  # 0.1% chance to win
+    variable:
+      initialChance: 0.001     # 0.1% initial chance
+      maxChance: 0.01          # 1% maximum chance
+      threshold: 50000         # When jackpot reaches this, use maxChance
   datasource:
     bet:
       jdbcUrl: ${spring.datasource.jdbcUrl}?currentSchema=jackpot_bet

@@ -2,6 +2,7 @@ package com.sportygroup.jackpotsystem.contribution.infrastructure.config;
 
 import com.sportygroup.jackpotsystem.contribution.domain.ContributionStore;
 import com.sportygroup.jackpotsystem.contribution.domain.ContributionStrategy;
+import com.sportygroup.jackpotsystem.contribution.domain.GetContributionsQuery;
 import com.sportygroup.jackpotsystem.contribution.domain.ProcessBetEventCommand;
 import com.sportygroup.jackpotsystem.contribution.infrastructure.store.ContributionStoreDatabase;
 import com.sportygroup.jackpotsystem.contribution.infrastructure.store.mapper.ContributionStoreMapper;
@@ -20,8 +21,13 @@ public class ContributionBeanConfig {
 
     @Bean
     ProcessBetEventCommand processBetEventCommand(ContributionStore contributionStore,
-                                                  ContributionStrategy contributionStrategy) {
+                                                   ContributionStrategy contributionStrategy) {
         return new ProcessBetEventCommand(contributionStore, contributionStrategy);
+    }
+
+    @Bean
+    GetContributionsQuery getContributionsQuery(ContributionStore contributionStore) {
+        return new GetContributionsQuery(contributionStore);
     }
 }
 

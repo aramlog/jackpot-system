@@ -10,7 +10,8 @@ public record JackpotReward(
         UUID userId,
         UUID jackpotId,
         BigDecimal rewardAmount,
-        Instant createdAt) {
+        Instant createdAt
+) {
 }
 
 
