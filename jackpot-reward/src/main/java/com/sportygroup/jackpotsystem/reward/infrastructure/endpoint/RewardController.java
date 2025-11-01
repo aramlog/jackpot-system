@@ -19,7 +19,7 @@ public class RewardController {
 
     private final EvaluateRewardCommand evaluateRewardCommand;
 
-    @PostMapping("/protected/v1/rewards/evaluate")
+    @PostMapping("/public/v1/rewards/evaluate")
     @Operation(summary = "Evaluate if a bet wins the jackpot")
     public ResponseEntity<EvaluateRewardResponse> evaluateReward(@Valid @RequestBody EvaluateRewardRequest request) {
         final var input = request.toInput();

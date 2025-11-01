@@ -1,4 +1,4 @@
-package com.sportygroup.jackpotsystem.contribution.domain;
+package com.sportygroup.jackpotsystem.contribution.domain.strategy;
 
 import java.math.BigDecimal;
 

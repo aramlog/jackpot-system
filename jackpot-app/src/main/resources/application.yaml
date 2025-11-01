@@ -37,14 +37,6 @@ jackpot:
   kafka:
     topics:
       bet: jackpot-bets
-  contribution:
-    type: FIXED  # FIXED or VARIABLE
-    fixed:
-      percentage: 0.05  # 5%
-    variable:
-      initialPercentage: 0.05  # 5%
-      minPercentage: 0.02      # 2%
-      threshold: 10000         # When jackpot reaches this, use minPercentage
   reward:
     type: FIXED  # FIXED or VARIABLE
     fixed:

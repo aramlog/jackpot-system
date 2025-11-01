@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <changeSet id="2.0_jackpot_table" author="Aram Kirakosyan">
+        <createTable tableName="jackpot">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contribution_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="initial_pool" type="DECIMAL(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fixed_percentage" type="DECIMAL(19,4)"/>
+            <column name="variable_initial_percentage" type="DECIMAL(19,4)"/>
+            <column name="variable_min_percentage" type="DECIMAL(19,4)"/>
+            <column name="variable_threshold" type="DECIMAL(19,2)"/>
+        </createTable>
+
+        <createIndex tableName="jackpot" indexName="idx_jackpot_name">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="2.1_insert_initial_jackpots" author="Aram Kirakosyan">
+        <insert tableName="jackpot">
+            <column name="id" value="550e8400-e29b-41d4-a716-446655440000"/>
+            <column name="name" value="Fixed Percentage Jackpot"/>
+            <column name="contribution_type" value="FIXED"/>
+            <column name="initial_pool" value="1000.00"/>
+            <column name="fixed_percentage" value="0.05"/>
+        </insert>
+
+        <insert tableName="jackpot">
+            <column name="id" value="550e8400-e29b-41d4-a716-446655440001"/>
+            <column name="name" value="Variable Percentage Jackpot"/>
+            <column name="contribution_type" value="VARIABLE"/>
+            <column name="initial_pool" value="5000.00"/>
+            <column name="variable_initial_percentage" value="0.05"/>
+            <column name="variable_min_percentage" value="0.02"/>
+            <column name="variable_threshold" value="10000.00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
+

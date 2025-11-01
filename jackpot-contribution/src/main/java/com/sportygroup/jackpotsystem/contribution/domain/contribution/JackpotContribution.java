@@ -1,4 +1,4 @@
-package com.sportygroup.jackpotsystem.contribution.domain;
+package com.sportygroup.jackpotsystem.contribution.domain.contribution;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -12,7 +12,8 @@ public record JackpotContribution(
         BigDecimal stakeAmount,
         BigDecimal contributionAmount,
         BigDecimal currentJackpotAmount,
-        Instant createdAt) {
+        Instant createdAt
+) {
 }
 
 

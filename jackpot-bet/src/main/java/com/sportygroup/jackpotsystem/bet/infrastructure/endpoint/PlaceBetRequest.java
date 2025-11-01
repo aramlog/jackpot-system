@@ -1,5 +1,6 @@
 package com.sportygroup.jackpotsystem.bet.infrastructure.endpoint;
 
+import com.sportygroup.jackpotsystem.bet.domain.PlaceBetCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
@@ -27,4 +28,12 @@ public class PlaceBetRequest {
     @DecimalMin("0.0")
     @Schema(description = "Bet amount", example = "100.00")
     BigDecimal betAmount;
+
+    public PlaceBetCommand.Input toInput() {
+        return new PlaceBetCommand.Input(
+                getUserId(),
+                getJackpotId(),
+                getBetAmount()
+        );
+    }
 }

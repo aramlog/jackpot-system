@@ -1,6 +1,6 @@
-package com.sportygroup.jackpotsystem.contribution.infrastructure.endpoint;
+package com.sportygroup.jackpotsystem.contribution.infrastructure.endpoint.contribution;
 
-import com.sportygroup.jackpotsystem.contribution.domain.GetContributionsQuery;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionsQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class ContributionController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<GetContributionsResponse> getContributionsByJackpotId(@PathVariable("jackpotId") UUID jackpotId) {
         final var output = getContributionsQuery.execute(new GetContributionsQuery.Input(jackpotId));
-        final var response = GetContributionsResponse.fromOutput(output);
+        final var response = GetContributionsResponse.of(output);
         return ResponseEntity.ok(response);
     }
 }

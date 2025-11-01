@@ -1,6 +1,6 @@
 package com.sportygroup.jackpotsystem.contribution.infrastructure.store.mapper;
 
-import com.sportygroup.jackpotsystem.contribution.domain.JackpotContribution;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.JackpotContribution;
 import com.sportygroup.jackpotsystem.contribution.infrastructure.store.entity.ContributionEntity;
 import org.mapstruct.Mapper;
 

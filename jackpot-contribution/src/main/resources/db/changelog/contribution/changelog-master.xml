@@ -5,6 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 
     <include file="1.0_initial_tables.xml" relativeToChangelogFile="true"/>
+    <include file="2.0_jackpot_table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
 

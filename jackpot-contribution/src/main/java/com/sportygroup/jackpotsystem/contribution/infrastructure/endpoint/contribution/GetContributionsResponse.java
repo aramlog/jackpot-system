@@ -1,7 +1,7 @@
-package com.sportygroup.jackpotsystem.contribution.infrastructure.endpoint;
+package com.sportygroup.jackpotsystem.contribution.infrastructure.endpoint.contribution;
 
-import com.sportygroup.jackpotsystem.contribution.domain.GetContributionsQuery;
-import com.sportygroup.jackpotsystem.contribution.domain.JackpotContribution;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionsQuery;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.JackpotContribution;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public record GetContributionsResponse(List<ContributionItem> contributions) {
 
-    public static GetContributionsResponse fromOutput(GetContributionsQuery.Output output) {
+    public static GetContributionsResponse of(GetContributionsQuery.Output output) {
         final var items = output.contributions().stream()
                 .map(ContributionItem::fromDomain)
                 .collect(Collectors.toList());
