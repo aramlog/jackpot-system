@@ -31,6 +31,12 @@ public class ContributionStoreDatabase implements ContributionStore {
                 .map(contributionStoreMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    @TransactionalContribution
+    public void deleteByJackpotId(UUID jackpotId) {
+        repository.deleteAll(repository.findByJackpotId(jackpotId));
+    }
 }
 
 

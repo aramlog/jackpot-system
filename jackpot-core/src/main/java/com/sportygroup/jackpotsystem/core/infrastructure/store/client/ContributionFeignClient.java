@@ -3,6 +3,7 @@ package com.sportygroup.jackpotsystem.core.infrastructure.store.client;
 import com.sportygroup.jackpotsystem.core.infrastructure.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -20,6 +21,9 @@ public interface ContributionFeignClient {
 
     @GetMapping(value = "/internal/v1/contributions/jackpot/{jackpotId}", produces = "application/json")
     ResponseEntity<ContributionResponse> getContributionsByJackpotId(@PathVariable("jackpotId") UUID jackpotId);
+
+    @DeleteMapping(value = "/internal/v1/contributions/jackpot/{jackpotId}")
+    ResponseEntity<Void> deleteContributionsByJackpotId(@PathVariable("jackpotId") UUID jackpotId);
 
     record ContributionResponse(List<ContributionItem> contributions) {
     }

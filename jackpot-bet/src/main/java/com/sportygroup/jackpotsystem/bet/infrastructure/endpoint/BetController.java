@@ -17,7 +17,7 @@ public class BetController {
 
     private final PlaceBetCommand placeBetCommand;
 
-    @PostMapping("/public /v1/bets")
+    @PostMapping("/public/v1/bets")
     @Operation(summary = "Place a bet")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PlaceBetResponse> placeBet(@Valid @RequestBody PlaceBetRequest request) {

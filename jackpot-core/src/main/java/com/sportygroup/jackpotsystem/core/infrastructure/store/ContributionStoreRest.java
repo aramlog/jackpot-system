@@ -40,5 +40,14 @@ public class ContributionStoreRest implements ContributionStore {
             throw new IllegalStateException("Failed to get contributions by jackpot id", ex);
         }
     }
+
+    @Override
+    public void deleteContributionsByJackpotId(UUID jackpotId) {
+        try {
+            contributionFeignClient.deleteContributionsByJackpotId(jackpotId);
+        } catch (FeignException ex) {
+            throw new IllegalStateException("Failed to delete contributions by jackpot id", ex);
+        }
+    }
 }
 

@@ -50,6 +50,7 @@ public class KafkaConfig {
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        configProps.put(JsonDeserializer.VALUE_TYPE_METHOD, "com.sportygroup.jackpotsystem.core.infrastructure.config.KafkaTypeResolver.resolveType");
         configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "jackpot-system");
         return new DefaultKafkaConsumerFactory<>(configProps);

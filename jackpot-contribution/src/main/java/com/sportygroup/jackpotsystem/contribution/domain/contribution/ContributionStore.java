@@ -8,6 +8,8 @@ public interface ContributionStore {
     JackpotContribution save(JackpotContribution contribution);
 
     List<JackpotContribution> findByJackpotId(UUID jackpotId);
+
+    void deleteByJackpotId(UUID jackpotId);
 }
 
 

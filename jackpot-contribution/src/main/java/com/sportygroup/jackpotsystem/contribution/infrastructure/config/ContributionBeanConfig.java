@@ -3,6 +3,7 @@ package com.sportygroup.jackpotsystem.contribution.infrastructure.config;
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.ContributionStore;
 import com.sportygroup.jackpotsystem.contribution.domain.strategy.ContributionStrategyFactory;
 import com.sportygroup.jackpotsystem.contribution.domain.jackpot.CreateJackpotCommand;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.DeleteContributionsCommand;
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionsQuery;
 import com.sportygroup.jackpotsystem.contribution.domain.jackpot.JackpotStore;
 import com.sportygroup.jackpotsystem.contribution.domain.ProcessBetEventCommand;
@@ -50,6 +51,11 @@ public class ContributionBeanConfig {
     @Bean
     CreateJackpotCommand createJackpotCommand(JackpotStore jackpotStore) {
         return new CreateJackpotCommand(jackpotStore);
+    }
+
+    @Bean
+    DeleteContributionsCommand deleteContributionsCommand(ContributionStore contributionStore) {
+        return new DeleteContributionsCommand(contributionStore);
     }
 }
 

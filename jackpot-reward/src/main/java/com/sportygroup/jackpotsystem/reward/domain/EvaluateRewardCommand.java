@@ -48,7 +48,9 @@ public class EvaluateRewardCommand {
             savedReward = rewardStore.save(reward);
             log.info("Reward saved: id={}, rewardAmount={}", savedReward.id(), savedReward.rewardAmount());
 
-            // TODO: Reset jackpot to initial pool value (needs Jackpot configuration)
+            // Reset jackpot to initial pool value by deleting all contributions
+            contributionStore.deleteContributionsByJackpotId(input.jackpotId());
+            log.info("Jackpot reset by deleting all contributions for jackpotId: {}", input.jackpotId());
         } else {
             log.info("Bet did not win jackpot for betId: {}", input.betId());
         }
