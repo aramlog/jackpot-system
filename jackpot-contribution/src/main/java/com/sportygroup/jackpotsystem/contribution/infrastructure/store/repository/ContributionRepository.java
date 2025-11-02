@@ -4,17 +4,17 @@ import com.sportygroup.jackpotsystem.contribution.infrastructure.store.entity.Co
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface ContributionRepository extends JpaRepository<ContributionEntity, UUID> {
-    List<ContributionEntity> findByJackpotId(UUID jackpotId);
 
-    List<ContributionEntity> findByBetId(UUID betId);
+    List<ContributionEntity> findByJackpotIdOrderByCreatedAtAsc(UUID jackpotId);
 
-    List<ContributionEntity> findByCreatedAtBetween(Instant from, Instant to);
+    Optional<ContributionEntity> findByBetId(UUID betId);
+
 }
 
 

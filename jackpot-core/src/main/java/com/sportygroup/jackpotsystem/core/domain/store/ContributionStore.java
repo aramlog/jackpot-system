@@ -9,6 +9,8 @@ public interface ContributionStore {
 
     List<JackpotContributionResult> getContributionsByJackpotId(UUID jackpotId);
 
+    JackpotContributionResult getContributionByBetId(UUID betId);
+
     void deleteContributionsByJackpotId(UUID jackpotId);
 
     record JackpotContributionResult(

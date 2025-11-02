@@ -9,6 +9,7 @@ import com.sportygroup.jackpotsystem.contribution.infrastructure.store.repositor
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -27,15 +28,22 @@ public class ContributionStoreDatabase implements ContributionStore {
     @Override
     @TransactionalContributionReadOnly
     public List<JackpotContribution> findByJackpotId(UUID jackpotId) {
-        return repository.findByJackpotId(jackpotId).stream()
+        return repository.findByJackpotIdOrderByCreatedAtAsc(jackpotId).stream()
                 .map(contributionStoreMapper::toDomain)
                 .toList();
     }
 
     @Override
+    @TransactionalContributionReadOnly
+    public Optional<JackpotContribution> findByBetId(UUID betId) {
+        return repository.findByBetId(betId)
+                .map(contributionStoreMapper::toDomain);
+    }
+
+    @Override
     @TransactionalContribution
     public void deleteByJackpotId(UUID jackpotId) {
-        repository.deleteAll(repository.findByJackpotId(jackpotId));
+        repository.deleteAll(repository.findByJackpotIdOrderByCreatedAtAsc(jackpotId));
     }
 }
 

@@ -42,6 +42,32 @@ public class ContributionStoreRest implements ContributionStore {
     }
 
     @Override
+    public JackpotContributionResult getContributionByBetId(UUID betId) {
+        try {
+            final ResponseEntity<ContributionFeignClient.ContributionItem> response =
+                    contributionFeignClient.getContributionByBetId(betId);
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                throw new IllegalStateException("Contribution retrieval failed with status: " + response.getStatusCode());
+            }
+            final var item = Objects.requireNonNull(response.getBody());
+            return new JackpotContributionResult(
+                    item.id(),
+                    item.betId(),
+                    item.userId(),
+                    item.jackpotId(),
+                    item.stakeAmount(),
+                    item.contributionAmount(),
+                    item.currentJackpotAmount(),
+                    item.createdAt()
+            );
+        } catch (FeignException.NotFound ex) {
+            throw new IllegalStateException("Contribution not found for betId: " + betId);
+        } catch (FeignException ex) {
+            throw new IllegalStateException("Failed to get contribution by bet id", ex);
+        }
+    }
+
+    @Override
     public void deleteContributionsByJackpotId(UUID jackpotId) {
         try {
             contributionFeignClient.deleteContributionsByJackpotId(jackpotId);

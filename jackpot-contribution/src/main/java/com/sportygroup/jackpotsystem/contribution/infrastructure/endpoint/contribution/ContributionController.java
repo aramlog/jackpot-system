@@ -1,6 +1,7 @@
 package com.sportygroup.jackpotsystem.contribution.infrastructure.endpoint.contribution;
 
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionsQuery;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionQuery;
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.DeleteContributionsCommand;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +19,7 @@ import java.util.UUID;
 public class ContributionController {
 
     private final GetContributionsQuery getContributionsQuery;
+    private final GetContributionQuery getContributionQuery;
     private final DeleteContributionsCommand deleteContributionsCommand;
 
     @GetMapping("/internal/v1/contributions/jackpot/{jackpotId}")
@@ -26,6 +28,15 @@ public class ContributionController {
     public ResponseEntity<GetContributionsResponse> getContributionsByJackpotId(@PathVariable("jackpotId") UUID jackpotId) {
         final var output = getContributionsQuery.execute(new GetContributionsQuery.Input(jackpotId));
         final var response = GetContributionsResponse.of(output);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/internal/v1/contributions/bet/{betId}")
+    @Operation(summary = "[Internal] Get contribution by bet id")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GetContributionResponse> getContributionByBetId(@PathVariable("betId") UUID betId) {
+        final var output = getContributionQuery.execute(new GetContributionQuery.Input(betId));
+        final var response = GetContributionResponse.of(output);
         return ResponseEntity.ok(response);
     }
 

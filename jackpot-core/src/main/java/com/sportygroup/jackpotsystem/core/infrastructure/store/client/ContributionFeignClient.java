@@ -22,6 +22,9 @@ public interface ContributionFeignClient {
     @GetMapping(value = "/internal/v1/contributions/jackpot/{jackpotId}", produces = "application/json")
     ResponseEntity<ContributionResponse> getContributionsByJackpotId(@PathVariable("jackpotId") UUID jackpotId);
 
+    @GetMapping(value = "/internal/v1/contributions/bet/{betId}", produces = "application/json")
+    ResponseEntity<ContributionItem> getContributionByBetId(@PathVariable("betId") UUID betId);
+
     @DeleteMapping(value = "/internal/v1/contributions/jackpot/{jackpotId}")
     ResponseEntity<Void> deleteContributionsByJackpotId(@PathVariable("jackpotId") UUID jackpotId);
 

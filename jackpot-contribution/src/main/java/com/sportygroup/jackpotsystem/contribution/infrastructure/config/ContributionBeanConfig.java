@@ -4,6 +4,7 @@ import com.sportygroup.jackpotsystem.contribution.domain.contribution.Contributi
 import com.sportygroup.jackpotsystem.contribution.domain.strategy.ContributionStrategyFactory;
 import com.sportygroup.jackpotsystem.contribution.domain.jackpot.CreateJackpotCommand;
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.DeleteContributionsCommand;
+import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionQuery;
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.GetContributionsQuery;
 import com.sportygroup.jackpotsystem.contribution.domain.jackpot.JackpotStore;
 import com.sportygroup.jackpotsystem.contribution.domain.ProcessBetEventCommand;
@@ -56,6 +57,11 @@ public class ContributionBeanConfig {
     @Bean
     DeleteContributionsCommand deleteContributionsCommand(ContributionStore contributionStore) {
         return new DeleteContributionsCommand(contributionStore);
+    }
+
+    @Bean
+    GetContributionQuery getContributionQuery(ContributionStore contributionStore) {
+        return new GetContributionQuery(contributionStore);
     }
 }
 

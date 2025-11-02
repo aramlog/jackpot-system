@@ -34,6 +34,7 @@ spring:
 
 jackpot:
   contributionApiBaseUrl: http://localhost:8080
+  betApiBaseUrl: http://localhost:8080
   kafka:
     topics:
       bet: jackpot-bets

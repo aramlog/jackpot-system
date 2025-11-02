@@ -1,7 +1,6 @@
 package com.sportygroup.jackpotsystem.reward.domain;
 
 import com.sportygroup.jackpotsystem.core.domain.store.ContributionStore;
-import com.sportygroup.jackpotsystem.core.domain.store.ContributionStore.JackpotContributionResult;
 import com.sportygroup.jackpotsystem.reward.domain.strategy.RewardStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,18 +18,16 @@ public class EvaluateRewardCommand {
     private final RewardStrategy rewardStrategy;
 
     public Output execute(Input input) {
-        log.info("Evaluating reward for betId: {}, jackpotId: {}", input.betId(), input.jackpotId());
+        log.info("Evaluating reward for betId: {}", input.betId());
 
-        // Get current jackpot amount from contributions
-        final var existingContributions = contributionStore.getContributionsByJackpotId(input.jackpotId());
-        final var currentJackpotAmount = existingContributions.stream()
-                .map(JackpotContributionResult::contributionAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        // Get contribution for this bet to get the jackpot amount at the time the bet was placed
+        final var contribution = contributionStore.getContributionByBetId(input.betId());
+        final var currentJackpotAmount = contribution.currentJackpotAmount();
 
-        log.info("Current jackpot amount: {}", currentJackpotAmount);
+        log.info("Jackpot amount at bet time: {}", currentJackpotAmount);
 
         // Evaluate if bet wins using strategy
-        final var isWin = rewardStrategy.evaluateWin(input.betAmount(), currentJackpotAmount);
+        final var isWin = rewardStrategy.evaluateWin(contribution.stakeAmount(), currentJackpotAmount);
 
         JackpotReward savedReward = null;
         if (isWin) {
@@ -38,9 +35,9 @@ public class EvaluateRewardCommand {
 
             final var reward = new JackpotReward(
                     null,
-                    input.betId(),
-                    input.userId(),
-                    input.jackpotId(),
+                    contribution.betId(),
+                    contribution.userId(),
+                    contribution.jackpotId(),
                     currentJackpotAmount,
                     Instant.now()
             );
@@ -49,8 +46,8 @@ public class EvaluateRewardCommand {
             log.info("Reward saved: id={}, rewardAmount={}", savedReward.id(), savedReward.rewardAmount());
 
             // Reset jackpot to initial pool value by deleting all contributions
-            contributionStore.deleteContributionsByJackpotId(input.jackpotId());
-            log.info("Jackpot reset by deleting all contributions for jackpotId: {}", input.jackpotId());
+            contributionStore.deleteContributionsByJackpotId(contribution.jackpotId());
+            log.info("Jackpot reset by deleting all contributions for jackpotId: {}", contribution.jackpotId());
         } else {
             log.info("Bet did not win jackpot for betId: {}", input.betId());
         }
@@ -58,12 +55,7 @@ public class EvaluateRewardCommand {
         return new Output(isWin, savedReward != null ? savedReward.rewardAmount() : BigDecimal.ZERO);
     }
 
-    public record Input(
-            UUID betId,
-            UUID userId,
-            UUID jackpotId,
-            BigDecimal betAmount
-    ) {
+    public record Input(UUID betId) {
     }
 
     public record Output(

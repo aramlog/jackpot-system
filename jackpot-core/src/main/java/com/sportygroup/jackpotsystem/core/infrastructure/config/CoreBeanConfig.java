@@ -1,7 +1,10 @@
 package com.sportygroup.jackpotsystem.core.infrastructure.config;
 
+import com.sportygroup.jackpotsystem.core.domain.store.BetStore;
 import com.sportygroup.jackpotsystem.core.domain.store.ContributionStore;
+import com.sportygroup.jackpotsystem.core.infrastructure.store.BetStoreRest;
 import com.sportygroup.jackpotsystem.core.infrastructure.store.ContributionStoreRest;
+import com.sportygroup.jackpotsystem.core.infrastructure.store.client.BetFeignClient;
 import com.sportygroup.jackpotsystem.core.infrastructure.store.client.ContributionFeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +15,11 @@ public class CoreBeanConfig {
     @Bean
     ContributionStore coreContributionStore(ContributionFeignClient contributionFeignClient) {
         return new ContributionStoreRest(contributionFeignClient);
+    }
+
+    @Bean
+    BetStore coreBetStore(BetFeignClient betFeignClient) {
+        return new BetStoreRest(betFeignClient);
     }
 }
 
