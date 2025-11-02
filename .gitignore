@@ -38,9 +38,6 @@ out/
 # VS Code
 .vscode/
 
-# Local env/config
-*.env
-*.env.*
 .envrc
 
 # Coverage / reports
