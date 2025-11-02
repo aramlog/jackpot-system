@@ -1,7 +1,7 @@
 package com.sportygroup.jackpotsystem.contribution.infrastructure.messaging;
 
 import com.sportygroup.jackpotsystem.contribution.domain.ProcessBetEventCommand;
-import com.sportygroup.jackpotsystem.core.infrastructure.messaging.BetEvent;
+import com.sportygroup.jackpotsystem.core.domain.messaging.BetEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

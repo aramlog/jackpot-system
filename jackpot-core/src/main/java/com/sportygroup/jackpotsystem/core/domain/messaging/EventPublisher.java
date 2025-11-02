@@ -1,7 +1,7 @@
-package com.sportygroup.jackpotsystem.core.infrastructure.messaging;
+package com.sportygroup.jackpotsystem.core.domain.messaging;
 
 /**
- * Generic interface for publishing events to a message broker.
+ * Domain interface for publishing events to a message broker.
  *
  * @param <T> the type of event to publish
  */

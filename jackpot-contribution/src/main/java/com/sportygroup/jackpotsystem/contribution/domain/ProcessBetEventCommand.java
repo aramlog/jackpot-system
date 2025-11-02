@@ -4,8 +4,8 @@ import com.sportygroup.jackpotsystem.contribution.domain.contribution.Contributi
 import com.sportygroup.jackpotsystem.contribution.domain.contribution.JackpotContribution;
 import com.sportygroup.jackpotsystem.contribution.domain.jackpot.JackpotStore;
 import com.sportygroup.jackpotsystem.contribution.domain.strategy.ContributionStrategyFactory;
+import com.sportygroup.jackpotsystem.core.domain.messaging.BetEvent;
 import com.sportygroup.jackpotsystem.core.exception.NotFoundException;
-import com.sportygroup.jackpotsystem.core.infrastructure.messaging.BetEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

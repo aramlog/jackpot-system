@@ -24,7 +24,7 @@ public class KafkaTypeResolver {
         if (TOPIC_BETS.equals(topic)) {
             log.debug("Resolved to BetEvent for topic: {}", topic);
             return TypeFactory.defaultInstance().constructType(
-                    com.sportygroup.jackpotsystem.core.infrastructure.messaging.BetEvent.class
+                    com.sportygroup.jackpotsystem.core.domain.messaging.BetEvent.class
             );
         }
 

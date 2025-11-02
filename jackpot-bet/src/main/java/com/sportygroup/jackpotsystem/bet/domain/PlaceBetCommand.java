@@ -1,6 +1,5 @@
 package com.sportygroup.jackpotsystem.bet.domain;
 
-import com.sportygroup.jackpotsystem.bet.infrastructure.messaging.BetEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +12,7 @@ import java.util.UUID;
 public class PlaceBetCommand {
 
     private final BetStore betStore;
-    private final BetEventPublisher betEventPublisher;
+    private final BetPublisher betEventPublisher;
 
     public Output execute(Input input) {
         final var now = Instant.now();

@@ -1,4 +1,4 @@
-package com.sportygroup.jackpotsystem.core.infrastructure.messaging;
+package com.sportygroup.jackpotsystem.core.domain.messaging;
 
 import java.math.BigDecimal;
 import java.time.Instant;

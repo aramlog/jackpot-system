@@ -1,15 +1,16 @@
 package com.sportygroup.jackpotsystem.bet.infrastructure.messaging;
 
 import com.sportygroup.jackpotsystem.bet.domain.Bet;
-import com.sportygroup.jackpotsystem.core.infrastructure.messaging.BetEvent;
-import com.sportygroup.jackpotsystem.core.infrastructure.messaging.EventPublisher;
+import com.sportygroup.jackpotsystem.bet.domain.BetPublisher;
+import com.sportygroup.jackpotsystem.core.domain.messaging.BetEvent;
+import com.sportygroup.jackpotsystem.core.domain.messaging.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class BetEventPublisher {
+public class BetEventPublisher implements BetPublisher {
 
     private final EventPublisher<Object> eventPublisher;
 

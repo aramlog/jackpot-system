@@ -1,5 +1,6 @@
 package com.sportygroup.jackpotsystem.core.infrastructure.messaging;
 
+import com.sportygroup.jackpotsystem.core.domain.messaging.EventPublisher;
 import com.sportygroup.jackpotsystem.core.exception.InternalServerException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
