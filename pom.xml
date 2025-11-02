@@ -34,9 +34,7 @@
         <jackpot-reward.version>1.0.0-SNAPSHOT</jackpot-reward.version>
         <jackpot-app.version>1.0.0-SNAPSHOT</jackpot-app.version>
 
-        <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.34</lombok.version>
-        <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
         <springdoc-openapi.version>2.8.13</springdoc-openapi.version>
         <archunit.version>1.4.0</archunit.version>
     </properties>
@@ -109,18 +107,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Mapstruct dependencies-->
-            <dependency>
-                <artifactId>mapstruct</artifactId>
-                <groupId>org.mapstruct</groupId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <artifactId>mapstruct-processor</artifactId>
-                <groupId>org.mapstruct</groupId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-
             <!-- Test dependencies -->
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
@@ -145,16 +131,6 @@
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok</artifactId>
                                 <version>${lombok.version}</version>
-                            </path>
-                            <path>
-                                <groupId>org.mapstruct</groupId>
-                                <artifactId>mapstruct-processor</artifactId>
-                                <version>${mapstruct.version}</version>
-                            </path>
-                            <path>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok-mapstruct-binding</artifactId>
-                                <version>${lombok.mapstruct.binding.version}</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>

@@ -2,14 +2,34 @@ package com.sportygroup.jackpotsystem.bet.infrastructure.store.mapper;
 
 import com.sportygroup.jackpotsystem.bet.domain.Bet;
 import com.sportygroup.jackpotsystem.bet.infrastructure.store.entity.BetEntity;
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface BetStoreMapper {
+@Component
+public class BetStoreMapper {
 
-    BetEntity toEntity(Bet bet);
+    public BetEntity toEntity(Bet bet) {
+        if (bet == null) {
+            return null;
+        }
+        BetEntity entity = new BetEntity();
+        entity.setBetId(bet.betId());
+        entity.setUserId(bet.userId());
+        entity.setJackpotId(bet.jackpotId());
+        entity.setBetAmount(bet.betAmount());
+        entity.setCreatedAt(bet.createdAt());
+        return entity;
+    }
 
-    Bet toDomain(BetEntity entity);
+    public Bet toDomain(BetEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        return new Bet(
+                entity.getBetId(),
+                entity.getUserId(),
+                entity.getJackpotId(),
+                entity.getBetAmount(),
+                entity.getCreatedAt()
+        );
+    }
 }
-
-

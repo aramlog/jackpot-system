@@ -53,14 +53,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <dependency>
-            <artifactId>mapstruct</artifactId>
-            <groupId>org.mapstruct</groupId>
-        </dependency>
-        <dependency>
-            <artifactId>mapstruct-processor</artifactId>
-            <groupId>org.mapstruct</groupId>
-        </dependency>
 
         <!-- Database dependencies -->
         <dependency>
