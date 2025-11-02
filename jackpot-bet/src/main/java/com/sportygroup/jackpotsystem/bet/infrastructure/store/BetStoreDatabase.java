@@ -6,8 +6,6 @@ import com.sportygroup.jackpotsystem.bet.infrastructure.store.mapper.BetStoreMap
 import com.sportygroup.jackpotsystem.bet.infrastructure.store.repository.BetRepository;
 import lombok.RequiredArgsConstructor;
 
-import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,30 +28,6 @@ public class BetStoreDatabase implements BetStore {
     public Optional<Bet> findById(UUID betId) {
         return repository.findById(betId)
                 .map(betStoreMapper::toDomain);
-    }
-
-    @Override
-    @TransactionalBetReadOnly
-    public List<Bet> findByUserId(UUID userId) {
-        return repository.findByUserId(userId).stream()
-                .map(betStoreMapper::toDomain)
-                .toList();
-    }
-
-    @Override
-    @TransactionalBetReadOnly
-    public List<Bet> findByJackpotId(UUID jackpotId) {
-        return repository.findByJackpotId(jackpotId).stream()
-                .map(betStoreMapper::toDomain)
-                .toList();
-    }
-
-    @Override
-    @TransactionalBetReadOnly
-    public List<Bet> findBetween(Instant from, Instant to) {
-        return repository.findByCreatedAtBetween(from, to).stream()
-                .map(betStoreMapper::toDomain)
-                .toList();
     }
 }
 
