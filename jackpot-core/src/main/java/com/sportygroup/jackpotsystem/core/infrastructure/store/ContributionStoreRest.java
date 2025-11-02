@@ -1,6 +1,8 @@
 package com.sportygroup.jackpotsystem.core.infrastructure.store;
 
 import com.sportygroup.jackpotsystem.core.domain.store.ContributionStore;
+import com.sportygroup.jackpotsystem.core.exception.NotFoundException;
+import com.sportygroup.jackpotsystem.core.exception.ServiceUnavailableException;
 import com.sportygroup.jackpotsystem.core.infrastructure.store.client.ContributionFeignClient;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,7 @@ public class ContributionStoreRest implements ContributionStore {
             final ResponseEntity<ContributionFeignClient.ContributionResponse> response =
                     contributionFeignClient.getContributionsByJackpotId(jackpotId);
             if (!response.getStatusCode().is2xxSuccessful()) {
-                throw new IllegalStateException("Contribution retrieval failed with status: " + response.getStatusCode());
+                throw new ServiceUnavailableException("Contribution retrieval failed with status: " + response.getStatusCode());
             }
             return Objects.requireNonNull(response.getBody()).contributions().stream()
                     .map(item -> new JackpotContributionResult(
@@ -37,7 +39,7 @@ public class ContributionStoreRest implements ContributionStore {
                     ))
                     .collect(Collectors.toList());
         } catch (FeignException ex) {
-            throw new IllegalStateException("Failed to get contributions by jackpot id", ex);
+            throw new ServiceUnavailableException("Failed to get contributions by jackpot id", ex);
         }
     }
 
@@ -47,7 +49,7 @@ public class ContributionStoreRest implements ContributionStore {
             final ResponseEntity<ContributionFeignClient.ContributionItem> response =
                     contributionFeignClient.getContributionByBetId(betId);
             if (!response.getStatusCode().is2xxSuccessful()) {
-                throw new IllegalStateException("Contribution retrieval failed with status: " + response.getStatusCode());
+                throw new ServiceUnavailableException("Contribution retrieval failed with status: " + response.getStatusCode());
             }
             final var item = Objects.requireNonNull(response.getBody());
             return new JackpotContributionResult(
@@ -61,9 +63,9 @@ public class ContributionStoreRest implements ContributionStore {
                     item.createdAt()
             );
         } catch (FeignException.NotFound ex) {
-            throw new IllegalStateException("Contribution not found for betId: " + betId);
+            throw new NotFoundException("Contribution not found for betId: " + betId);
         } catch (FeignException ex) {
-            throw new IllegalStateException("Failed to get contribution by bet id", ex);
+            throw new ServiceUnavailableException("Failed to get contribution by bet id", ex);
         }
     }
 
@@ -72,7 +74,7 @@ public class ContributionStoreRest implements ContributionStore {
         try {
             contributionFeignClient.deleteContributionsByJackpotId(jackpotId);
         } catch (FeignException ex) {
-            throw new IllegalStateException("Failed to delete contributions by jackpot id", ex);
+            throw new ServiceUnavailableException("Failed to delete contributions by jackpot id", ex);
         }
     }
 }

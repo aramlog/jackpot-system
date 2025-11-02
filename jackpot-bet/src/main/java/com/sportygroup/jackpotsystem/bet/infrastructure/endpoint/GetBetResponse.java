@@ -2,6 +2,7 @@ package com.sportygroup.jackpotsystem.bet.infrastructure.endpoint;
 
 import com.sportygroup.jackpotsystem.bet.domain.Bet;
 import com.sportygroup.jackpotsystem.bet.domain.GetBetQuery;
+import com.sportygroup.jackpotsystem.core.exception.NotFoundException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Value;
 
@@ -41,7 +42,7 @@ public class GetBetResponse {
     public static GetBetResponse of(GetBetQuery.Output output) {
         final Optional<Bet> bet = output.bet();
         if (bet.isEmpty()) {
-            throw new IllegalArgumentException("Bet not found");
+            throw new NotFoundException("Bet not found");
         }
         final Bet b = bet.get();
         return new GetBetResponse(
