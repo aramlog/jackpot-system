@@ -1,0 +1,43 @@
+spring:
+  liquibase:
+    enabled: false
+  kafka:
+    bootstrap-servers: localhost:9092
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+      hibernate.hbm2ddl.auto: create-drop
+    generate-ddl: true
+  datasource:
+    jdbcUrl: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+
+jackpot:
+  contributionApiBaseUrl: http://localhost:8080
+  reward:
+    type: FIXED
+    fixed:
+      winChance: 0.5
+    variable:
+      initialChance: 0.001
+      maxChance: 0.01
+      threshold: 50000
+  datasource:
+    bet:
+      jdbcUrl: ${spring.datasource.jdbcUrl}
+      liquibase:
+        shouldRun: false
+    contribution:
+      jdbcUrl: ${spring.datasource.jdbcUrl}
+      liquibase:
+        shouldRun: false
+    reward:
+      jdbcUrl: ${spring.datasource.jdbcUrl}
+      liquibase:
+        shouldRun: false
+
